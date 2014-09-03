@@ -1,21 +1,13 @@
-BUILD=ocamlbuild -use-ocamlfind -plugin-tag 'package(js_of_ocaml.ocamlbuild)'
-DEBUG=-tags 'pretty, noinline, debug'
+BUILD=eval `opam config env` && ocamlbuild -use-ocamlfind -plugin-tag 'package(js_of_ocaml.ocamlbuild)'
 OUT=src/example.js
 
 build:
-	${BUILD} \
-	${DEBUG} \
- 	${OUT}
+	${BUILD} -quiet -tags 'pretty, noinline, debug' ${OUT}
 
 dist: clean
-	${BUILD} \
-	-tags 'opt(3)' \
-	${OUT}
-
-sublime:
-	eval `opam config env` && ${BUILD} ${DEBUG} ${OUT}
+	${BUILD} -quiet -tags 'opt(3)' ${OUT}
 
 clean:
-	ocamlbuild -clean
+	@ocamlbuild -quiet -clean
 
 .PHONY: build dist sublime clean

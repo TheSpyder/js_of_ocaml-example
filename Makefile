@@ -5,7 +5,7 @@ build:
 	${BUILD} -quiet -tags 'pretty, noinline, debug' ${OUT}
 
 dist: clean
-	${BUILD} -quiet -tags 'opt(3)' ${OUT}
+	@${BUILD} -quiet -tags 'opt(3)' ${OUT}
 
 clean:
 	@ocamlbuild -quiet -clean
